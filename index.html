@@ -335,4 +335,9 @@
 
     <script>
         // Event listener untuk tombol login (di luar module)
-        document.getElementById('loginBtn').addEvent
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            new bootstrap.Modal(document.getElementById('loginModal')).show();
+        });
+
+        // Filter tabel
+        document.getElementById('searchInput').addEventListener('keyup', function
