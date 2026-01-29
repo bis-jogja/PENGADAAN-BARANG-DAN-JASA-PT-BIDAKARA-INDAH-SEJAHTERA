@@ -198,7 +198,7 @@
             projectId: "pt-bidakara-indah-sejahtera",
             storageBucket: "pt-bidakara-indah-sejahtera.firebasestorage.app",
             messagingSenderId: "112946385367",
-            appId: "1:112946385367:web:a695c2acc28a318b077b92"
+            appId: "1:112946385367:web:a695c2acc28a318b077b92",
             measurementId: "G-41WKPCDDGK"
         };
         const app = initializeApp(firebaseConfig);
@@ -312,4 +312,27 @@
         });
 
         // Fungsi tampilkan detail
-        window.showDetail = async function(id)
+        window.showDetail = async function(id) {
+            try {
+                const docSnap = await getDoc(doc(db, "tenders", id));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('modalBody').innerHTML = `
+                        <h6>${data.name}</h6>
+                        <p>${data.desc}</p>
+                        <p><strong>Deadline:</strong> ${data.deadline}</p>
+                        <p><strong>Status:</strong> ${data.status || 'Dibuka'}</p>
+                    `;
+                    new bootstrap.Modal(document.getElementById('detailModal')).show();
+                } else {
+                    alert("Detail tidak ditemukan.");
+                }
+            } catch (error) {
+                console.error("Error showing detail:", error);
+            }
+        };
+    </script>
+
+    <script>
+        // Event listener untuk tombol login (di luar module)
+        document.getElementById('loginBtn').addEvent
