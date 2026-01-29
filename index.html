@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Pengadaan Modern - PT Bidakara Indah Sejahtera</title>
     
-    <link rel="icon" type="image/png" href="https://via.placeholder.com/32x32?text=BIS">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -21,8 +20,11 @@
         .admin-only { display: none !important; }
         .section-title { position: relative; display: inline-block; padding-bottom: 10px; margin-bottom: 30px; }
         .section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 50px; height: 3px; background-color: #0d6efd; }
-        .navbar-logo { height: 45px; width: auto; margin-right: 12px; }
-        .hero-logo { height: 100px; width: auto; margin-bottom: 20px; filter: drop-shadow(0px 4px 6px rgba(0,0,0,0.2)); }
+        
+        /* Styling Logo */
+        .navbar-logo { height: 50px; width: auto; margin-right: 15px; }
+        .hero-logo { height: 160px; width: auto; margin-bottom: 25px; filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3)); }
+        .footer-logo { height: 40px; opacity: 0.8; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -30,7 +32,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="https://via.placeholder.com/150x50?text=LOGO+BIS" alt="Logo PT BIS" class="navbar-logo">
+                <img src="Logo PT.Bidakara Indah Sejahtera (1) (2).jpg" alt="Logo PT BIS" class="navbar-logo">
                 <span class="fw-bold d-none d-sm-inline">PT Bidakara Indah Sejahtera</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -55,9 +57,9 @@
 
     <section id="home" class="hero text-center">
         <div class="container">
-            <img src="https://via.placeholder.com/200x200?text=LOGO+BIS" alt="Logo PT BIS" class="hero-logo">
+            <img src="Logo PT.Bidakara Indah Sejahtera (1) (2).jpg" alt="Logo PT BIS" class="hero-logo">
             <h1 class="display-4 fw-bold mb-3">E-Procurement System</h1>
-            <p class="lead mb-4">Sistem Pengadaan Barang & Jasa Terintegrasi.</p>
+            <p class="lead mb-4">Portal Pengadaan Barang & Jasa PT Bidakara Indah Sejahtera.</p>
             <a href="#tenders" class="btn btn-light text-primary btn-lg fw-bold shadow">Lihat Pengumuman</a>
         </div>
     </section>
@@ -93,7 +95,7 @@
                         <input type="date" id="tenderDeadline" class="form-control" required>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label small fw-bold">PDF Tender</label>
+                        <label class="form-label small fw-bold">File PDF</label>
                         <input type="file" id="tenderFile" class="form-control" accept="application/pdf" required>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
@@ -184,13 +186,13 @@
                                     <select class="form-select" id="regUsaha" required>
                                         <option value="">Pilih...</option>
                                         <option value="Konstruksi">Konstruksi</option>
-                                        <option value="IT">IT & Komputer</option>
-                                        <option value="ATK">ATK & Furniture</option>
-                                        <option value="Jasa">Jasa Konsultasi</option>
+                                        <option value="IT & Komputer">IT & Komputer</option>
+                                        <option value="ATK & Furniture">ATK & Furniture</option>
+                                        <option value="Jasa Konsultasi">Jasa Konsultasi</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Alamat</label>
+                                    <label class="form-label fw-bold">Alamat Lengkap</label>
                                     <textarea class="form-control" id="regAlamat" rows="2" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100 fw-bold">Daftar Sekarang</button>
@@ -204,7 +206,7 @@
 
     <footer class="text-center">
         <div class="container">
-            <img src="https://via.placeholder.com/100x30?text=LOGO+BIS" alt="Logo" style="height: 30px; margin-bottom: 10px; opacity: 0.7;">
+            <img src="Logo PT.Bidakara Indah Sejahtera (1) (2).jpg" alt="Logo PT BIS" class="footer-logo">
             <p class="mb-0 small text-muted">&copy; 2026 PT Bidakara Indah Sejahtera. All Rights Reserved.</p>
         </div>
     </footer>
@@ -218,8 +220,12 @@
                 </div>
                 <div class="modal-body">
                     <form id="loginForm">
-                        <div class="mb-3"><input type="email" id="loginEmail" class="form-control" placeholder="Email" required></div>
-                        <div class="mb-3"><input type="password" id="loginPassword" class="form-control" placeholder="Password" required></div>
+                        <div class="mb-3">
+                            <input type="email" id="loginEmail" class="form-control" placeholder="Email Admin" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                        </div>
                         <button type="submit" class="btn btn-dark w-100">Login</button>
                     </form>
                 </div>
@@ -235,6 +241,7 @@
         import { getFirestore, collection, addDoc, getDocs, doc, query, orderBy, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
+        // Konfigurasi Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyArYnPXsCXCzdQIpDQ0XxgW_vJYEzLeqAg",
             authDomain: "pt-bidakara-indah-sejahtera.firebaseapp.com",
@@ -251,6 +258,7 @@
 
         let currentUser = null;
 
+        // AUTH CONTROL
         onAuthStateChanged(auth, (user) => {
             currentUser = user;
             const adminElements = document.querySelectorAll('.admin-only');
@@ -267,13 +275,14 @@
             loadTenders();
         });
 
-        // LOGIN/LOGOUT
+        // LOGIN / LOGOUT
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
                 await signInWithEmailAndPassword(auth, document.getElementById('loginEmail').value, document.getElementById('loginPassword').value);
                 bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
-            } catch (err) { alert("Login Gagal!"); }
+                alert("Login Admin Berhasil!");
+            } catch (err) { alert("Login Gagal: " + err.message); }
         });
         document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
 
@@ -293,10 +302,11 @@
                     desc: document.getElementById('tenderDesc').value,
                     deadline: document.getElementById('tenderDeadline').value,
                     fileUrl: fileUrl,
+                    status: "Dibuka",
                     createdAt: new Date()
                 });
                 alert("Berhasil!"); e.target.reset(); loadTenders();
-            } catch (e) { alert(e.message); }
+            } catch (e) { alert("Gagal: " + e.message); }
             finally { btn.disabled = false; btn.innerText = "Upload"; }
         });
 
@@ -311,7 +321,7 @@
             snap.forEach(docSnap => {
                 const d = docSnap.data();
                 const isExpired = today > d.deadline;
-                let actions = `<a href="${d.fileUrl}" target="_blank" class="btn btn-danger btn-sm"><i class="fas fa-file-pdf"></i></a>`;
+                let actions = `<a href="${d.fileUrl}" target="_blank" class="btn btn-danger btn-sm"><i class="fas fa-file-pdf"></i> PDF</a>`;
                 if(currentUser) actions += `<button onclick="deleteTender('${docSnap.id}')" class="btn btn-dark btn-sm ms-1"><i class="fas fa-trash"></i></button>`;
                 
                 tbody.innerHTML += `<tr>
@@ -339,39 +349,32 @@
             });
         };
 
-        // DOWNLOAD PDF (JSPDF)
+        // FITUR CETAK PDF
         window.downloadVendorPDF = function() {
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            
             doc.setFontSize(18);
             doc.text("LAPORAN DATABASE PENYEDIA", 14, 20);
             doc.setFontSize(11);
             doc.text("PT Bidakara Indah Sejahtera", 14, 28);
-            doc.text("Tanggal Cetak: " + new Date().toLocaleDateString('id-ID'), 14, 34);
-            
-            doc.autoTable({
-                html: '#vendorsTable',
-                startY: 40,
-                theme: 'grid',
-                headStyles: { fillColor: [255, 193, 7] }, // Warna kuning seperti tabel web
-                styles: { fontSize: 9 }
-            });
-            
+            doc.text("Dicetak pada: " + new Date().toLocaleDateString('id-ID'), 14, 34);
+            doc.autoTable({ html: '#vendorsTable', startY: 40, theme: 'grid', headStyles: { fillColor: [255, 193, 7] } });
             doc.save("Laporan_Vendor_BIS.pdf");
         };
 
-        // REGISTER
+        // REGISTER VENDOR
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            await addDoc(collection(db, "pendaftar"), {
-                namaPerusahaan: document.getElementById('regNama').value,
-                email: document.getElementById('regEmail').value,
-                bidangUsaha: document.getElementById('regUsaha').value,
-                alamat: document.getElementById('regAlamat').value,
-                tanggalDaftar: new Date().toISOString()
-            });
-            alert("Terdaftar!"); e.target.reset();
+            try {
+                await addDoc(collection(db, "pendaftar"), {
+                    namaPerusahaan: document.getElementById('regNama').value,
+                    email: document.getElementById('regEmail').value,
+                    bidangUsaha: document.getElementById('regUsaha').value,
+                    alamat: document.getElementById('regAlamat').value,
+                    tanggalDaftar: new Date().toISOString()
+                });
+                alert("Pendaftaran Berhasil Terkirim!"); e.target.reset();
+            } catch (e) { alert("Error: " + e.message); }
         });
     </script>
 
